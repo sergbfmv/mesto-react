@@ -4,8 +4,9 @@ function PopupWithForm(props) {
     <div className="popup__container">
       <button className={`popup__close-button popup__close-button_type_${props.name}`} type="button" onClick={props.onClose}></button>
       <h2 className="popup__title">{props.title}</h2>
-      <form className={`popup__form popup__form_type_${props.name}`} name={props.name} novalidate>
+      <form className={`popup__form popup__form_type_${props.name}`} name={props.name} noValidate>
         {props.children}
+        <button type="submit" name="save" className="popup__save-button">Сохранить</button>
       </form>
     </div>
   </section>

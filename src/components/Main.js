@@ -1,11 +1,12 @@
 import React from 'react'
-import api from '../utils/Api'
+import api from '../utils/api'
 import Card from '../components/Card'
+import edit from '../images/edit.svg'
 
 function Main(props) {
-  const [userName, setUserName] = React.useState()
-  const [userDescription, setUserDescription] = React.useState()
-  const [userAvatar, setUserAvatar] = React.useState()
+  const [userName, setUserName] = React.useState('')
+  const [userDescription, setUserDescription] = React.useState('')
+  const [userAvatar, setUserAvatar] = React.useState('')
   const [cards, setCards] = React.useState([])
 
   React.useEffect(() => {
@@ -14,16 +15,13 @@ function Main(props) {
       setUserDescription(description)
       setUserAvatar(avatar)
     }
-    api.getProfileInfo()
-      .then((data) => {
+
+    Promise.all([api.getProfileInfo(), api.getInitialCards()])
+      .then(([data, items]) => {
         renderUserInfo(data.name, data.about, data.avatar)
+        setCards(items)
       })
       .catch(err => Promise.reject(err))
-
-      api.getInitialCards()
-        .then((items) => {
-          setCards(items)
-        })
   }, [])
 
   return (
@@ -31,7 +29,7 @@ function Main(props) {
     <section className="profile-columns">
       <div className="profile">
         <div className="profile__avatar" onClick={props.onEditAvatar} style={{ backgroundImage: `url(${userAvatar})` }}></div>
-        <img src="<%=require('../images/edit.svg')%>" alt="Правка" className="profile__edit-icon"/>
+        <img src={edit} alt="Правка" className="profile__edit-icon"/>
         <div className="profile__info">
           <div className="profile__header">
             <h1 className="profile__title">{userName}</h1>
@@ -45,7 +43,7 @@ function Main(props) {
     <section className="elements">
       {cards.map((card) => {
         return(
-          <Card card = {card} onCardClick = {props.onCardClick} />
+          <Card card = {card} key = {card._id} onCardClick = {props.onCardClick} />
       )})}
     </section>
   </main>
