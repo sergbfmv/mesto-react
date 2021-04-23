@@ -5,9 +5,10 @@
   opacity: 1;
   transition: opacity 0.4s ease;
   cursor: pointer;
-  z-index: -1;
+  visibility: hidden;
 }
 
 .profile__edit-icon:hover {
   opacity: 0.2;
+  visibility: visible;
 }

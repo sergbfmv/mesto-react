@@ -88,6 +88,26 @@ export class Api {
     )
   }
 
+  changeLikeCardStatus(id, isLiked) {
+    if(isLiked) {
+        return fetch(`${this.url + '/cards/likes'}/${id}`, {
+          method: 'PUT',
+          headers: this.headers,
+        })
+        .then(res => 
+          this._checkStatus(res)
+        )
+    } else {
+        return fetch(`${this.url + '/cards/likes'}/${id}`, {
+          method: 'DELETE',
+          headers: this.headers,
+        })
+        .then(res => 
+          this._checkStatus(res)
+        )
+      }
+  }
+
   changeAvatar(link) {
     return fetch(this.url + '/users/me/avatar', {
       method: 'PATCH',
