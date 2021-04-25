@@ -14,7 +14,7 @@ function App() {
   const [isAddPlacePopupOpen, setPlacePopupOpen] = React.useState(false)
   const [isEditAvatarPopupOpen, setAvatarPopupOpen] = React.useState(false)
   const [selectedCard, setSelectedCard] = React.useState({})
-  const [currentUser, setCurrentUser] = React.useState([])
+  const [currentUser, setCurrentUser] = React.useState({})
   const [cards, setCards] = React.useState([])
 
   function handleEditAvatarClick() {
@@ -74,7 +74,7 @@ function App() {
 
   function handleCardDelete(card) {
     api.removeCard(card._id)
-      .then((data) => {
+      .then(() => {
         setCards(cards.filter(item => item._id !== card._id))
       })
       .catch(err => Promise.reject(err))
@@ -107,6 +107,15 @@ function App() {
   <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
       <Header />
+      <Main 
+        cards={cards} 
+        onCardLike={handleCardLike} 
+        onCardDelete={handleCardDelete} 
+        onEditProfile={handleEditProfileClick} 
+        onAddPlace={handleAddPlaceClick} 
+        onEditAvatar={handleEditAvatarClick} 
+        onCardClick={handleCardClick} 
+      />
       <Main cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
       <Footer />
       <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
