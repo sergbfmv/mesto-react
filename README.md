@@ -1,5 +1,18 @@
 # Getting Started with Create React App
 
+Проект: Место на React
+Проект о красивых местах. При создании применялись:
+
+React
+методологии БЭМ, Nested;
+CSS;
+HTML;
+grid;
+адаптивная вёрсткаб под различную ширину экранов;
+работа с макетом в Figma;
+javaScript;
+ООП;
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

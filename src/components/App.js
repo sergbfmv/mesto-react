@@ -74,9 +74,9 @@ function App() {
 
   function handleCardDelete(card) {
     api.removeCard(card._id)
-      .then(() => {
-        setCards(cards.filter(item => item._id !== card._id))
-      })
+      .then((data) => {
+        setCards((cards) => cards.filter(item => item._id !== card._id))
+    })
       .catch(err => Promise.reject(err))
   }
 
