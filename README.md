@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Проект Место на React
 
 Проект: Место на React
 Проект о красивых местах.
